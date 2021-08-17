@@ -1,23 +1,20 @@
-function range(start, end, step = start > end ? -1 : 1) {
-  let arr = [];
-  if (start < end) {
-    for (let i = start; i <= end; i += step) {
-      arr.push(i);
-    }
-  } else {
-    for (let i = start; i >= end; i += step) {
-      arr.push(i);
-    }
+const reverseArray = (arr) => {
+  let newArr = [];
+  for (let i of arr) {
+    newArr.unshift(i);
+  }
+  return newArr;
+};
+console.log(reverseArray(['A', 'B', 'C']));
+
+const reverseArrayInPlace = (arr) => {
+  for (let i = 0; i < Math.floor(arr.length / 2); i++) {
+    let old = arr[i];
+    arr[i] = arr[arr.length - 1 - i];
+    arr[arr.length - 1 - i] = old;
   }
   return arr;
-}
-
-function sum(arr) {
-  let counter = 0;
-  for (let i of arr) {
-    counter += i;
-  }
-  return counter;
-}
-console.log(range(5, 2, -1));
-console.log(sum(range(1, 10)));
+};
+let arrayValue = [1, 2, 3, 4, 5];
+reverseArrayInPlace(arrayValue);
+console.log(arrayValue);
