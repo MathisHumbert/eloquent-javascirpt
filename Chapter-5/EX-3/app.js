@@ -11,5 +11,6 @@ function every(array, test) {
 function every(array, test) {
   return !array.some((arr) => !test(arr));
 }
+
 console.log(every([1, 3, 5], (n) => n < 10));
 console.log(every([2, 4, 16], (n) => n < 10));
