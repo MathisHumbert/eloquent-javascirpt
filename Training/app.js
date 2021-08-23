@@ -69,3 +69,56 @@ console.log(ages2);
 console.log(`Julia is ${ages2.get('Julia')}`);
 console.log(`Is Jack's age known ?`, ages2.has('Jack'));
 console.log(`Is toString's age known ?`, ages2.has('toString'));
+
+Rabbit.prototype.toString = function () {
+  return `a ${this.type} rabbit`;
+};
+console.log(String(blackRabbit));
+
+console.clear();
+
+let sym = Symbol('name');
+console.log(sym == Symbol('name'));
+Rabbit.prototype[sym] = 55;
+console.log(blackRabbit[sym]);
+
+const toStringSymbol = Symbol('toString');
+Array.prototype[toStringSymbol] = function () {
+  return `${this.length} cm of blue yarn`;
+};
+console.log([1, 2].toString());
+console.log([1, 2][toStringSymbol]());
+
+let okIterator = 'OK'[Symbol.iterator]();
+console.log(okIterator.next());
+console.log(okIterator.next());
+console.log(okIterator.next());
+
+let varyingSize = {
+  get size() {
+    return Math.floor(Math.random() * 100);
+  },
+};
+
+console.log(varyingSize.size);
+console.log(varyingSize.size);
+
+class Temperature {
+  constructor(celsius) {
+    this.celsius = celsius;
+  }
+  get fahrenheit() {
+    return this.celsius * 1.8 + 32;
+  }
+  set fahrenheit(value) {
+    this.celsius = (value - 32) / 1.8;
+  }
+  static fromFahrenheit(value) {
+    return new Temperature((value - 32) / 1.8);
+  }
+}
+
+let temp = new Temperature(22);
+console.log(temp.fahrenheit);
+temp.fahrenheit = 86;
+console.log(temp.celsius);
