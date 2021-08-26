@@ -60,3 +60,50 @@ let matrix = new Matrix(2, 2, (x, y) => `value ${x}, ${y}`);
 for (let { x, y, value } of matrix) {
   console.log(x, y, value);
 }
+
+console.clear();
+
+let varyingSize = {
+  get size() {
+    return Math.floor(Math.random() * 100);
+  },
+};
+console.log(varyingSize.size);
+console.log(varyingSize.size);
+
+class Temperature {
+  constructor(celsius) {
+    this.celsius = celsius;
+  }
+  get fahrenheit() {
+    return this.celsius * 1.8 + 32;
+  }
+  set fahrenheit(value) {
+    this.celsius = (value - 32) / 1.8;
+  }
+  static fromFahrenheit(value) {
+    return new Temperature((value - 32) / 1.8);
+  }
+}
+
+let temp = new Temperature(22);
+console.log(temp.fahrenheit);
+console.log(temp.celsius);
+
+class SymmetricMatrix extends Matrix {
+  constructor(size, element = (x, y) => undefined) {
+    super(size, size, (x, y) => {
+      if (x < y) return element(y, x);
+      else return element(x, y);
+    });
+  }
+  set(x, y, value) {
+    super.set(x, y, value);
+    if (x != y) {
+      super.set(y, x, value);
+    }
+  }
+}
+
+let matrixBis = new SymmetricMatrix(5, (x, (y) => `${x}, ${y}`));
+console.log(matrixBis.get(2, 4));
